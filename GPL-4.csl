@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
-    <title>Geochemical Perspectives Letters - Strict (No Italic Authors)</title>
+    <title>Geochemical Perspectives Letters - Strict Final</title>
     <id>https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL.csl</id>
     <link href="https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL.csl" rel="self"/>
     <link href="https://www.geochemicalperspectivesletters.org/information-for-authors" rel="documentation"/>
@@ -15,8 +15,8 @@
     <category field="geology"/>
     <issn>2410-339X</issn>
     <eissn>2410-3403</eissn>
-    <summary>Strict GPL style: Normal font authors, italic et al. in citations, italic article titles, and full DOI links.</summary>
-    <updated>2025-12-26T14:00:00+00:00</updated>
+    <summary>GPL Style: Plain article titles, italic journal/book titles, normal author names with italic et al. in citations.</summary>
+    <updated>2025-12-26T14:15:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -27,26 +27,40 @@
       </term>
     </terms>
   </locale>
+  
   <macro name="author">
     <names variable="author">
       <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never" font-style="normal"/>
       <label form="short" prefix=" (" suffix=")"/>
       <substitute>
         <names variable="editor"/>
-        <text macro="title"/>
+        <text variable="title"/>
       </substitute>
     </names>
   </macro>
+
   <macro name="author-short">
     <names variable="author">
       <name form="short" and="text" delimiter=", " initialize-with="." font-style="normal"/>
       <et-al font-style="italic"/>
       <substitute>
         <names variable="editor"/>
-        <text macro="title"/>
+        <text variable="title"/>
       </substitute>
     </names>
   </macro>
+
+  <macro name="title">
+    <choose>
+      <if type="bill book graphic legal_case legislation motion_picture report song webpage" match="any">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+  </macro>
+
   <macro name="container-contributors">
     <choose>
       <if type="chapter paper-conference" match="any">
@@ -58,25 +72,14 @@
       </if>
     </choose>
   </macro>
-  <macro name="title">
-    <choose>
-      <if type="article-journal article-magazine article-newspaper" match="any">
-        <text variable="title" font-style="italic"/>
-      </if>
-      <else-if type="bill book graphic legal_case legislation motion_picture report song webpage" match="any">
-        <text variable="title" font-style="italic"/>
-      </else-if>
-      <else>
-        <text variable="title"/>
-      </else>
-    </choose>
-  </macro>
+
   <macro name="publisher">
     <group delimiter=", ">
       <text variable="publisher"/>
       <text variable="publisher-place"/>
     </group>
   </macro>
+
   <macro name="year-date">
     <choose>
       <if variable="issued">
@@ -89,6 +92,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="locators">
     <choose>
       <if type="article-journal article-magazine" match="any">
@@ -102,6 +106,7 @@
       </else>
     </choose>
   </macro>
+
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     <sort>
       <key macro="year-date"/>
@@ -114,6 +119,7 @@
       </group>
     </layout>
   </citation>
+
   <bibliography hanging-indent="true" entry-spacing="1">
     <sort>
       <key macro="author"/>
