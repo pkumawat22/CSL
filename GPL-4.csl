@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
-    <title>Geochemical Perspectives Letters - Strict Final</title>
-    <id>https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL.csl</id>
-    <link href="https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL.csl" rel="self"/>
+    <title>Geochemical Perspectives Letters - Strict Final v3</title>
+    <id>https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL_v3.csl</id>
+    <link href="https://gist.githubusercontent.com/pkumawat22/4b2e9eff771457c59508f57a905b678b/raw/GPL_v3.csl" rel="self"/>
     <link href="https://www.geochemicalperspectivesletters.org/information-for-authors" rel="documentation"/>
     <author>
       <name>John Creech</name>
@@ -13,11 +13,7 @@
     </contributor>
     <category citation-format="author-date"/>
     <category field="geology"/>
-    <issn>2410-339X</issn>
-    <eissn>2410-3403</eissn>
-    <summary>GPL Style: Plain article titles, italic journal/book titles, normal author names with italic et al. in citations.</summary>
-    <updated>2025-12-26T14:15:00+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    <updated>2025-12-26T16:00:00+00:00</updated>
   </info>
   <locale xml:lang="en">
     <terms>
@@ -30,7 +26,7 @@
   
   <macro name="author">
     <names variable="author">
-      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never" font-style="normal"/>
+      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
       <label form="short" prefix=" (" suffix=")"/>
       <substitute>
         <names variable="editor"/>
@@ -41,43 +37,13 @@
 
   <macro name="author-short">
     <names variable="author">
-      <name form="short" and="text" delimiter=", " initialize-with="." font-style="normal"/>
+      <name form="short" and="text" delimiter=", " initialize-with="."/>
       <et-al font-style="italic"/>
       <substitute>
         <names variable="editor"/>
         <text variable="title"/>
       </substitute>
     </names>
-  </macro>
-
-  <macro name="title">
-    <choose>
-      <if type="bill book graphic legal_case legislation motion_picture report song webpage" match="any">
-        <text variable="title" font-style="italic"/>
-      </if>
-      <else>
-        <text variable="title"/>
-      </else>
-    </choose>
-  </macro>
-
-  <macro name="container-contributors">
-    <choose>
-      <if type="chapter paper-conference" match="any">
-        <text term="in" text-case="capitalize-first" suffix=": "/>
-        <names variable="editor translator" delimiter=", " suffix=" ">
-          <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
-          <label form="short" prefix=" (" suffix=")"/>
-        </names>
-      </if>
-    </choose>
-  </macro>
-
-  <macro name="publisher">
-    <group delimiter=", ">
-      <text variable="publisher"/>
-      <text variable="publisher-place"/>
-    </group>
   </macro>
 
   <macro name="year-date">
@@ -93,18 +59,11 @@
     </choose>
   </macro>
 
-  <macro name="locators">
-    <choose>
-      <if type="article-journal article-magazine" match="any">
-        <group prefix=" " delimiter=", ">
-          <text variable="volume"/>
-          <text variable="page"/>
-        </group>
-      </if>
-      <else>
-        <text variable="page" prefix=", "/>
-      </else>
-    </choose>
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text variable="publisher"/>
+      <text variable="publisher-place"/>
+    </group>
   </macro>
 
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
@@ -129,14 +88,39 @@
       <group delimiter=" " suffix=" ">
         <text macro="author"/>
         <text macro="year-date" prefix="(" suffix=")"/>
-        <text macro="title" suffix="."/>
+        <text variable="title" font-style="normal" suffix="."/>
       </group>
-      <text macro="container-contributors"/>
-      <group delimiter=" ">
-        <text variable="container-title" font-style="italic"/>
-        <text macro="publisher"/>
-        <text macro="locators"/>
-      </group>
+      <choose>
+        <if type="article-journal article-magazine" match="any">
+          <group delimiter=" ">
+            <text variable="container-title" font-style="italic"/>
+            <group delimiter=", ">
+              <text variable="volume"/>
+              <text variable="page"/>
+            </group>
+          </group>
+        </if>
+        <else-if type="bill book report" match="any">
+          <group delimiter=", ">
+            <text variable="container-title" font-style="italic"/>
+            <text macro="publisher"/>
+          </group>
+        </else-if>
+        <else-if type="chapter paper-conference" match="any">
+          <group delimiter=" " suffix=", ">
+            <text term="in" text-case="capitalize-first" suffix=":"/>
+            <names variable="editor" delimiter=", ">
+              <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+              <label form="short" prefix=" (" suffix=")"/>
+            </names>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+          <group delimiter=", ">
+            <text macro="publisher"/>
+            <text variable="page"/>
+          </group>
+        </else-if>
+      </choose>
       <choose>
         <if variable="DOI">
           <text variable="DOI" prefix=". https://doi.org/"/>
