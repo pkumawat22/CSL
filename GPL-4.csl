@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-GB">
+  <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
+  <info>
+    <title>Geochemical Perspectives Letters - Strict</title>
+    <id>http://www.zotero.org/styles/geochemical-perspectives-letters-strict</id>
+    <link href="http://www.zotero.org/styles/geochemical-perspectives-letters-strict" rel="self"/>
+    <link href="https://www.geochemicalperspectivesletters.org/information-for-authors" rel="documentation"/>
+    <author>
+      <name>John Creech</name>
+    </author>
+    <contributor>
+      <name>Palash K.</name>
+    </contributor>
+    <category citation-format="author-date"/>
+    <category field="geology"/>
+    <issn>2410-339X</issn>
+    <eissn>2410-3403</eissn>
+    <summary>Strict GPL style: All authors listed in bibliography, italic article titles, italic et al. in citations, and full DOI links.</summary>
+    <updated>2025-12-26T12:52:12+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="en">
+    <terms>
+      <term name="editor" form="short">
+        <single>ed.</single>
+        <multiple>eds</multiple>
+      </term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-short">
+    <names variable="author">
+      <name form="short" and="text" delimiter=", " initialize-with="."/>
+      <et-al font-style="italic"/>
+      <substitute>
+        <names variable="editor"/>
+        <text macro="title"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="container-contributors">
+    <choose>
+      <if type="chapter paper-conference" match="any">
+        <text term="in" text-case="capitalize-first" suffix=": "/>
+        <names variable="editor translator" delimiter=", " suffix=" ">
+          <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="never"/>
+          <label form="short" prefix=" (" suffix=")"/>
+        </names>
+      </if>
+    </choose>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if type="article-journal article-magazine article-newspaper" match="any">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else-if type="bill book graphic legal_case legislation motion_picture report song webpage" match="any">
+        <text variable="title" font-style="italic"/>
+      </else-if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text variable="publisher"/>
+      <text variable="publisher-place"/>
+    </group>
+  </macro>
+  <macro name="year-date">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" form="short"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="locators">
+    <choose>
+      <if type="article-journal article-magazine" match="any">
+        <group prefix=" " delimiter=", ">
+          <text variable="volume"/>
+          <text variable="page"/>
+        </group>
+      </if>
+      <else>
+        <text variable="page" prefix=", "/>
+      </else>
+    </choose>
+  </macro>
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
+    <sort>
+      <key macro="year-date"/>
+      <key macro="author-short"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author-short"/>
+        <text macro="year-date"/>
+      </group>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="true" entry-spacing="1">
+    <sort>
+      <key macro="author"/>
+      <key macro="year-date"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=" " suffix=" ">
+        <text macro="author"/>
+        <text macro="year-date" prefix="(" suffix=")"/>
+        <text macro="title" suffix="."/>
+      </group>
+      <text macro="container-contributors"/>
+      <group delimiter=" ">
+        <text variable="container-title" font-style="italic"/>
+        <text macro="publisher"/>
+        <text macro="locators"/>
+      </group>
+      <choose>
+        <if variable="DOI">
+          <text variable="DOI" prefix=". https://doi.org/"/>
+        </if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
